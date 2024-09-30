@@ -1,0 +1,27 @@
+zdanie = "Jestem Anna i mam 18 lat."
+print(zdanie)
+
+duze = zdanie.upper()
+print(duze)
+
+male = zdanie.lower()
+print(male)
+
+zamien = zdanie.replace("Anna", "Szymon")
+print(zamien)
+
+spacje = zdanie.replace(" ", "_")
+print(spacje)
+
+odwroc = zdanie[::-1]
+print(odwroc)
+
+zdanie2 = "Chodzę do technikum."
+konkatenacja = zdanie + " " + zdanie2
+print(konkatenacja)
+
+zmienna = zdanie[::3]
+print(zmienna)
+
+dlugosc = len(zdanie)
+print(dlugosc)
