@@ -1,0 +1,93 @@
+# #klasyczne tworzenie listy
+
+# parzyste = []
+# for i in range(20):
+#     if i %2 ==0:
+#         parzyste.append(i)
+    
+# print(parzyste)
+
+
+
+# #list comprehension
+# #zmienna = [wyrazenie for element in sekwencja if warunek]
+
+# parz = [ i for i in range(20) if i % 2 == 0]
+# print(parz)
+
+# #to samo co u góry, krótszy zapis
+
+
+# owoce = ['jablko', 'gruszka', 'pomarancza', 'banan']
+
+# owoce_krotkie = [ owoc for owoc in owoce if len(owoc) <= 6]
+# print(owoce_krotkie)
+
+#===============================================================
+# x = 0
+# while x < 20:
+#     if x >= 10:
+#         break
+#     else:
+#         print(x)
+#     x += 1
+    
+#=================================================================
+# #try except finally
+
+# try:
+#     n = int(input("podaj liczbe: "))
+#     m = int(input("podaj druga liczbe: "))
+#     w = n/m
+#     print(f"wynik dzielenia to {n} dzielone przez {m} czyli {w}")
+# except ZeroDivisionError:
+#     print("nie dziele przez 0")
+# except ValueError:
+#     print("to nie liczba całkowita")
+# except Exception as err:
+#     print(f"wystapil nieoczekiwany blad: {err}")
+# finally:
+#     print("koniec dzialania...")
+
+
+from random import randint as rdi
+
+# print(rdi(-20,20))
+
+losowe = [ rdi(-20,20) for i in range(100)]
+# print(losowe)
+
+# for i in losowe:
+#     if i % 2 == 0:
+#         print(f" {i} parzysta")
+#     else:
+#         print(f" {i} nieparzysta")
+
+# if i >= 0:
+#     print(f" {i} dodatnia")
+# else:
+#     print(f" {i} ujemna")
+    
+# losowe = [ ele ** 2 for ele in losowe ]
+# print(losowe)
+
+# losowe = list(set(losowe))
+# print(losowe)
+
+# print(f"ilosc liczb: {len(losowe)}")
+
+litery = dict()
+zdanie = "Jestem Andrzej, mam 18 lat i chodzę do technikum nr.1 w Chojnicach. Chodzę do 3 klasy"
+
+zdanie = zdanie.lower()
+# for c in zdanie:
+#     if not litery.get(c):
+#         litery.update({c : zdanie.count(c) })
+
+for c in zdanie:
+    if c in litery.keys():
+        litery[c] += 1
+    else:
+        litery[c] == 1
+
+print(litery)
