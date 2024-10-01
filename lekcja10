@@ -1,0 +1,67 @@
+
+
+
+
+
+# liczba = int(input("podaj liczbe calkowita: "))
+# if liczba < 0:
+#     print("podales liczbe ujemna")
+# elif liczba == 0:
+#     print("podales liczbe 0")
+# else:
+#     print("podales liczbe dodatnia")
+    
+#     #================================================================
+    
+# '''
+# jeśli prawda         if warunek       else jeśli  
+# '''
+
+# liczba2 = int(input("podaj liczbe calkowita: "))
+# if liczba2 % 2 == 0:
+#     print("liczba jest parzysta")
+# else:
+#     print("liczba jest nieparzysta")
+    
+#     print(f"liczba jest parzysta " if liczba % 2 == 0 else "liczba jest nieparzysta")
+# #to samo co wyzej, napisane w 1 linii
+# #=================================================================
+# #and / or
+
+# x = 5
+# y = -6
+
+# if x >= 0 and y >= 0:
+#     print("obie dodatnie")
+# else:
+#     print("obie liczby nie sa dodatnie")
+    
+# if x >= 0 or y >= 0:
+#     print("jedna lub obie dodatnie")
+# else:
+#     print("obie ujemne")
+#==================================================================
+#for
+
+# lista = [2, 3, 4, 5]
+# for i in lista:
+#     print(i)
+    
+#     for i in range(len(lista)):
+#         print(f"{i} : {lista[i]}")
+        
+#         for i, v in enumerate(lista):
+#             print(f"{i+1} : {v}")
+            
+            
+# slownik = {"a": 1, "b": 2, "c": 3}
+# for k, v in slownik.items():
+#     print(f"{k} : {v}")
+
+#=======================================================
+#while
+
+i = 0
+while i<8:
+    print(i)
+    i+=2
