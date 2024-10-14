@@ -1,0 +1,72 @@
+'''
+imię i nazwisko
+klasa
+data
+'''
+
+import random
+
+def generuj_liczby():
+    try:
+        with open("liczby.txt", "w") as file:
+            for _ in range(1000):
+                liczba = random.randint(1, 100)
+                file.write(f"{liczba}\n")
+    except IOError as e:
+        print(f"Wystąpił błąd przy zapisie do pliku: {e}")
+
+#---------------------------------------------------------
+        
+from collections import Counter
+import math
+
+def wczytaj_i_oblicz_statystyki():
+    try:
+        with open("liczby.txt", "r") as file:
+            liczby = [int(line.strip()) for line in file]
+
+        suma_liczb = sum(liczby)
+        iloczyn_liczb = math.prod(liczby)  # Uwaga: może być liczba zbyt duża dla Python
+        srednia_liczb = suma_liczb / len(liczby)
+        maksymalna_liczba = max(liczby)
+        minimalna_liczba = min(liczby)
+        najczestsza_liczba = Counter(liczby).most_common(1)[0][0]
+
+        statystyki = {
+            "suma": suma_liczb,
+            "iloczyn": iloczyn_liczb,
+            "średnia": srednia_liczb,
+            "maksymalna": maksymalna_liczba,
+            "minimalna": minimalna_liczba,
+            "najczęstsza": najczestsza_liczba
+        }
+
+        with open("staty.txt", "w") as file:
+            for klucz, wartosc in statystyki.items():
+                file.write(f"{klucz} - {wartosc}\n")
+
+    except IOError as e:
+        print(f"Wystąpił błąd przy odczycie pliku: {e}")
+
+#---------------------------------------------------------
+
+def sprawdz_znaki_ascii():
+    try:
+        with open("liczby.txt", "r") as file:
+            liczby = [int(line.strip()) for line in file]
+
+        with open("kody.txt", "w") as file:
+            for index, liczba in enumerate(liczby):
+                if 65 <= liczba <= 90 or 97 <= liczba <= 122:  # Zakres dla liter A-Z i a-z
+                    znak = chr(liczba)
+                    file.write(f"{znak} - {index}\n")
+
+    except IOError as e:
+        print(f"Wystąpił błąd przy odczycie pliku: {e}")
+
+#---------------------------------------------------------
+
+if __name__ == "__main__":
+    generuj_liczby()
+    wczytaj_i_oblicz_statystyki()
+    sprawdz_znaki_ascii()
