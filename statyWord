@@ -1,0 +1,36 @@
+'''
+aplikacja wczytujaca zawartosc z pliku podanego przez usera
+funkcja wyznaczajaca statystyki:
+-znakow bez spacji
+-znakow ze spacjami
+-znakow duzych (bez spacji)
+-znakow malych (bez spacji)
+-znakow bialych
+-wyrazow
+-akapitow
+-wierszy
+statystyki maja byc zapisane do pliku stat.txt
+'''
+
+import os
+
+def wczytajPlik():
+    
+    while True:
+        nazwa = input("podaj nazwe pliku (bez rozszerzen): ")
+        nazwa += '.txt'
+        try:
+            if os.path.isfile(nazwa):
+                with open(nazwa, 'rt+') as file:
+                tekst = file.readlines()
+                print(tekst)
+                break
+            else:
+                print(f"plik o nazwie {nazwa} nie istnieje. podaj inny plik")
+
+#-------------------MAIN-------------------
+def main():
+    wczytajPlik()
+
+if __name__ == "__main__":
+    main()
