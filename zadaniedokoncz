@@ -1,0 +1,42 @@
+import random
+
+
+def generator(n):
+#generowanie liczb {-100, 100}
+    liczby = [(random.randint(-100, 100), random.randint(-100, 100)) for _ in range(n)]
+    zapis(liczby)
+    
+    
+#zapis pliku
+def zapis(liczby):
+    try: 
+        with open("dane.txt", "w") as plik:
+            for kol1, kol2 in liczby:
+                plik.write(f"{kol1}\t{kol2}\n")
+    except FileNotFoundError:
+        print("nie znaleziono pliku")
+    except Exception as e:
+        print("wystąpił nieoczekiwany błąd: ", e)
+        
+#odczyt pliku
+def wczytaj(kol1, kol2):
+    try:
+        with open("dane.txt", "r") as plik:
+            zawartosc = plik.read()
+    except FileNotFoundError:
+        print("nie znaleziono pliku:")
+    except Exception as e:
+        print("wystąpił nieoczekiwany błąd", e)
+    
+#wyswietlanie ujemnych podzielnych przez 3
+def pktA(liczby):
+    for kol1, kol2 in liczby:
+        if kol1 < 0 and kol1 % 3 == 0:
+            print(kol1)
+
+
+def main():
+    generator(100)
+    zapis()
+    wczytaj()
+    pktA()
