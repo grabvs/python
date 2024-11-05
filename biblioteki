@@ -1,0 +1,59 @@
+import time
+from dekoratory import licznik_czasu
+import math
+import random
+import os
+
+@licznik_czasu
+def wyswietlaj(czas, ile):
+    for i in range(ile):
+        time.sleep(czas)
+        print(i)
+        
+        
+@licznik_czasu
+def sumuj(liczba1, liczba2):
+    return liczba1 + liczba2
+#wyswoetlaj(1,10)
+
+print(sumuj(123123,124124))
+obecny = time.localtime()
+print(f"aktualna data i czas {time.asctime(obecny)}")
+
+
+sek = time.time()
+print(f"sekund: {sek}")
+
+
+
+print(F"{math.sqrt(9.9)}")
+
+print(f"{2.0**3} {math.pow(2,3)}")
+
+print(f"{math.sin(math.pi / 2)}")
+
+print(f"{math.ceil(3.01)}   {math.floor(3.76)}  {round(3.4578658, 4)}")
+
+def zaok(liczba, miejsca):
+    czynnik = 10 ** miejsca
+    return math.floor(liczba*czynnik) / czynnik
+
+
+licz = 2.3456677
+print(f"{zaok(licz, 1)}")
+
+
+imiona = ["Jan", "Adam", "Anna", "Alicja", "Zenon"]
+
+print(random.choice(imiona))
+
+print(imiona)
+random.shuffle(imiona)
+print(imiona)
+
+print(random.sample(imiona, 3))
+
+
+
+
+print(os.getcdw())
