@@ -4,7 +4,8 @@ import matplotlib.pyplot as plt
 def generatorPliku():
     kat = ["Java", "Python", "C#", "Kotlin", "C++"]
     uzyt = [random.randint(1000, 100000) for i in range(len(kat))]
-
+with open('dane.txt', 'w') as file:
+file.write('')
     kategorie = ''
     for k in kat:
         kategorie += k+";"
