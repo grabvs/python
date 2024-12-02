@@ -25,21 +25,40 @@ class ciezarowy(Samochod):
         self.ladownosc = ladownosc
         
     def show(self):
-        (f"pojazd: {self.marka} model: {self.model} z roku: {self.rocznik} z przebiegiem {self.przebieg} o ladownosci {self.ladownosc} i obecnie zaladowano {self.ladunek}")
+        (f"pojazd: {self.marka} model: {self.model} z roku: {self.rocznik} z przebiegiem {self.przebieg} o ladownosci {self.ladownosc} i obecnie zaladowano {self.zaladunek}")
     
     def zaladunek(self, lad = 0):    
-        if self.ladunek + lad > self.ladownosc:
+        if self.zaladunek + lad > self.ladownosc:
             print("nie mozesz zaladowac wiecej niz dopuszczalna ladownosc")
         else:
-            self.ladunek += lad
+            self.zaladunek += lad
         return self.ladownosc
+    
+
+
+
+class osobowy(Samochod):
+    def __init__(self, marka, model, rocznik, przebieg, iloscPas):
+        self.iloscPas = iloscPas
+
+    def showOsobowy(self):
+        (f"pojazd: {self.marka} model: {self.model} z roku: {self.rocznik} z przebiegiem {self.przebieg} mieszczacy {self.iloscPas} pasazerow")
+
+    def Pas(self, pas = 0):
+        if self.pasazerowie + pas > self.iloscPas:
+            print("nie zmiescisz wiecej pasazerow!")
+        else:
+            self.pasazerowie += pas
+        return self.iloscPas
+
     
 #----------------------------MAIN------------------------------
     
 def main():
     sam1 = Samochod("BMW", "E39", 2021, 2000)
     sam2 = Samochod("Mercedes", "S200", 2012, 2000)
-    sam3 = ciezarowy("MAN", "A600", 600, 20900, 20)
+    sam3 = ciezarowy("MAN", "A600", 600, 20900, 20, 19)
+    sam4 = osobowy("opel", "astra", 2020, 190000, 4)
 
     print(sam1.show())
     print(sam2.show())
@@ -48,8 +67,11 @@ def main():
     sam2.zmienPrzebieg(100)
     print(sam2.show())
     print(sam3.show())
-    sam3.ladunek(19)
+    sam3.zaladunek(19)
     print(sam3.show())
+    sam4.Pas(3)
+    print(sam3.showOsobowy())
+
     
 main()
 
