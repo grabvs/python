@@ -1,0 +1,76 @@
+'''
+szyfr cezara (pelny)
+od 32 do 126 w kodach ASCII
+'''
+
+def zamiana():
+    znak = 'A'
+    print(f"znak {znak} w ASCII to {ord(znak)} a po dodaniu 1 to {ord(znak) + 1}")
+    
+    liczba = 123
+    print(f"nawias klamrowy w ASCII {liczba} a znak to {chr(liczba)}")
+    
+    
+def menu():
+    print("="*40)
+    print("="*8, "szyfrowanie cezara", "="*11)
+    print("="*40)
+    print("s - szyfrowanie, d - deszyfrowanie")
+    
+    
+def pobierz(co):
+    tekst = input(f"podaj tekst do {co}: ")
+    while True:
+        try:
+            klucz = int(input("podaj klucz: "))
+            break
+        except ValueError:
+            print("podaj liczbe calkowita")
+            
+    return tekst, klucz
+    
+    
+def szyfruj():
+    print("jestes w szyfrowaniu \n")
+    tekst, klucz = pobierz("szyfrowania")
+    print(f"chcesz zaszyfrowac tekst [{tekst}] kluczem [{klucz}]")
+    szyfr = ''
+    for i in tekst:
+        szyfr += chr(32 + (int(ord(i)) + klucz - 32)%94)
+    print(f"zaszyfrowany tekst to: [{szyfr}]")
+    
+    
+    
+def deszyfruj():
+    print("jestes w deszyfrowaniu \n")
+    szyfr, klucz = pobierz("odszyfrowania")
+    print(f"chcesz odszyfrowac tekst [{szyfr}] kluczem [{klucz}]")
+    for i in szyfr:
+        szyfr += chr(32 + (int(ord(i)) - klucz - 32)%94)
+    print(f"odszyfrowany tekst to: [{szyfr}]")
+    
+    
+def main():
+    
+    while True:
+        menu()
+       
+        while True: 
+            corobic = input("wybierz co zrobic: ")
+            if corobic.lower() == 's':
+                szyfruj()
+            elif corobic.lower() == 'd':
+                deszyfruj()
+            else:
+                print("zly wybor opcji")
+        
+        
+            odp = input("czy chcesz zakonczyc dzialanie programu? (t/n)")
+            if odp.lower() == 't':
+                print("program zakonczyl dzialanie")
+                break
+        
+        
+        
+        
+main()
