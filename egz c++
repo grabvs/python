@@ -1,0 +1,98 @@
+#include <vector>
+#include <cstdlib>
+#include <iostream>
+#include <ctime>
+
+using namespace std;
+
+class Tablica {
+private:
+    vector<int> tablica;
+    int rozmiar;
+
+public:
+    Tablica(int rozmiar) {
+        if (rozmiar <= 20) {
+            throw invalid_argument("rozmiar musi byc wiekszy niz 20");
+        }
+        this->rozmiar = rozmiar;
+        srand(time(NULL));
+        for (int i = 0; i < rozmiar; i++) {
+            tablica.push_back(rand() % 1000 + 1);
+        }
+    }
+
+    void wyswietl_elementy() {
+        for (int i = 0; i < rozmiar; i++) {
+            cout << i << " : " << tablica[i] << endl;
+        }
+    }
+    
+    int wyszukaj_element(int wartosc) {
+        for (int i = 0; i < rozmiar; i++) {
+            if (wartosc == tablica[i]) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    int wyswietl_nieparzyste() {
+        int liczbaNieparzystych = 0;
+        for (int i = 0; i < rozmiar; i++) {
+            if (tablica[i] % 2 != 0) {
+                cout << tablica[i] << " ";
+                liczbaNieparzystych++;
+
+            }
+        }
+        return liczbaNieparzystych;
+    }
+
+    double oblicz_srednia() {
+        if (rozmiar == 0) {
+            return 0;
+        }
+
+        int suma = 0;
+        for (int i = 0; i < rozmiar; i++) {
+            suma += tablica[i];
+        }
+        return (double)suma / (double)rozmiar;
+    }
+};
+
+int main()
+{
+    //rozmiar tablicy
+    int rozmiarTablicy = 25;
+
+    //obiekt z klasy Tablica
+    Tablica tablica(rozmiarTablicy);
+
+    //test wyswietlania
+    cout << "Elementy tablicy: " << endl;
+    tablica.wyswietl_elementy();
+
+    //test szukania wartosci w tablicy
+    int szukana;
+    cout << "Podaj liczbe szukana: ";
+    cin >> szukana;
+
+    int indeks = tablica.wyszukaj_element(szukana);
+    if (indeks != -1) {
+        cout << "Szukana znaleziona pod indeksem " << indeks << endl;
+    }
+    else {
+        cout << "Nie znaleziono szukanej liczby" << endl;
+    }
+
+    //test wypisania liczb nieparzystych z tablicy
+    cout << "Liczby nieparzyste: " << endl;
+    int ileLiczbNieparzystych = tablica.wyswietl_nieparzyste();
+    cout << "Ilosc liczb nieparzystych w tablicy: " << ileLiczbNieparzystych << endl;
+
+    //test obliczania sredniej
+    cout << "srednia liczb w tablicy: " << tablica.oblicz_srednia() << endl;
+}
+
