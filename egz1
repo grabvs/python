@@ -1,0 +1,81 @@
+import random
+""""
+/**
+nazwa: Klasa tablica
+opis: Klasa liczb calkowitych
+parametry: __tablica - tablica liczb. __rozmiar - rozmiar tablicy
+zwraca: tworzy obiekt
+autor: xyz
+*/
+"""
+class Tablica:
+    __slots__ = ['__tablica', '__rozmiar']  # "__nazwa - obiekt widoczny tylko w klasie Tablica, niewidoczne dla klas potomnych"
+    
+    
+    #konstruktor obiektu z klasy Tablica
+    def __init__(self, rozmiar):  # def __init__ to zapisanie konstruktora
+        if rozmiar <= 20:
+            raise ValueError("rozmiar mial byc wiekszy od 20!")  # jak rozmiar tablicy nie jest wiekszy niz 20 to wydupca blad
+        self.__rozmiar = rozmiar 
+        self.__tablica = [random.randint(1, 1000) for _ in range(rozmiar)] 
+        # generuje x liczb (rozmiar = x) od 1 do 1000. for _ in range (bo nie potrzebujemy i)
+        
+        #metoda wyswietlajaca indeks i element z obiektu tablicy
+    def wyswietl_elementy(self):
+        for indeks_tablicy, wartosc in enumerate(self.__tablica):  # enumerate pobiera z klasy 2 wartosci i je zwraca linijke nizej
+            print(f"{indeks_tablicy} : {wartosc}")
+     
+    """
+     /**
+     nazwa: wyszukaj_wartosc
+     opis: metoda szukania wartosci podanej przez uzytkownika w tablicy
+     parametry: 
+     zwraca: indeks liczby i wartosc
+     autor: xyz
+     */
+    """
+        #wyszukuje wartpsc w tablicy
+    def wyszukaj_wartosc(self, wartosc):
+        for indeks, element in enumerate(self.__tablica):
+            if element == wartosc:
+                return indeks
+        return -1  # jak element tablicy nie jest rowny wartosci to wydupca -1
+        
+        #metoda wyswietlajaca liczby nieparzyste i ich ilosc
+    def wyswietl_nieparzyste(self):
+        nieparzyste = [wartosc for wartosc in self.__tablica if wartosc % 2 != 0]  # warunek ze maja byc podzielne przez 2 i nie 0
+        for element in nieparzyste:
+            print(element)  # wyswietla wszystkie elementy
+        return len(nieparzyste)  # zwraca ile jest tych nieparzystych
+    
+        #metoda liczbaca srednia arytmetyczna z liczb w tablicy
+    def srednia(self):
+        if self.__rozmiar == 0:
+            return 0
+        return sum(self.__tablica) / self.__rozmiar  # sum podlicza to z tej tablicy i to jest srednia
+    
+def main():
+    # przykladowy rozmiar
+    rozmiar = 25
+    
+    # tablica
+    tablica = Tablica(rozmiar)
+    
+    print("Elementy tablicy: ")
+    tablica.wyswietl_elementy()
+
+    szukana = int(input("Podaj wartosc szukana: "))
+    indeks = tablica.wyszukaj_wartosc(szukana)
+    if indeks != -1:
+        print(f"Szukana wartosc znajduje sie pod indeksem : {indeks}")
+    else:
+        print("Szukana wartosc nie istnieje w tablicy")
+        
+    print("Liczby nieparzyste w tablicy: ")
+    ilosc_nieparzystych = tablica.wyswietl_nieparzyste()
+    print(f"Ilosc nieparzystych: {ilosc_nieparzystych}")
+    
+    print(f"Srednia arytmetyczna liczb w tablicy: {tablica.srednia():.2f}") # zapis :.2f wyswietla do 2 liczb po przecinku
+
+if __name__ == '__main__':
+    main()
