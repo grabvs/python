@@ -1,0 +1,72 @@
+
+class Pogoda:
+    def __init__(self, nazwa_pliku):
+        self.nazwa_pliku = nazwa_pliku
+        self.dane = self._wczytaj_dane()
+            
+    def _wczytaj_dane(self):
+        dane = []
+        with open(self.nazwa_pliku, "rt", encoding="utf-8") as f:
+            for linia in f:
+                wojewodztwo, data, temperatura, wiatr = linia.strip().split("\t")
+                temperatura = float(temperatura.replace("C", ""))
+                wiatr = float(wiatr.replace(" km/h",""))
+                dane.append({
+                    'wojewodztwo': wojewodztwo,
+                    'data' : data,
+                    'temperatura' : temperatura,
+                    'wiatr' : wiatr
+                })
+        return dane
+    
+    def srednia_temperatura(self):
+        temp_dict = []
+        for ele in self.dane:
+            woj = ele['wojewodztwo']
+            temp = ele['temperatura']
+            if woj not in temp_dict:
+                temp_dict[woj] = []
+            temp_dict[woj].append(temp)
+            
+        srednie = {}
+        for woj, temp in temp_dict.items():
+            srednie[woj] = sum(temp) / len(temp)
+        return srednie
+    
+    def extremum_wiatru(self):
+        wiatry = [ele['Wiatr'] for ele in self.dane]
+        return {'max': max(wiatry), 'min' : min(wiatry)}
+    
+    def wiatry_ponad_95(self):
+        wynik = []
+        for ele in self.dane:
+            if ele['wiatr'] > 95:
+                wynik.append((ele['data'], ele['wojewodztwo'], ele['wiatr']))
+        return wynik
+    
+    def zapisz(self, nazwa_pliku = "pogoda_wyniki.txt"):
+        try:
+            with open(nazwa_pliku, "wt", encoding="utf-8") as f:
+                f.write("#Średnia temperatura w każdym województwie\n")
+                srednie = self.srednia_temperatura()
+                for woj, temp in sorted(srednie.items()):
+                    f.write(f"{woj}: {temp:.2f}C\n")
+                    
+                f.write(f"# Maksymalna i minimalna prędkość wiatru\n")
+                ekstremum = self.extremum_wiatru()
+                f.write(f"Maksymalna: {ekstremum['max']}km/h\n")
+                f.write(f"Maksymalna: {ekstremum['min']}km/h\n")
+                
+                f.write(f"# Daty i wojewodztwa z wiatrem powyzej 95km/h\n")
+                for data, woj, wiatr in self.wiatry_ponad_95():
+                    f.write(f"{data} - {woj}: {wiatr}km/h")
+                    
+                print(f"\nDane zapisane do pliku {nazwa_pliku}")
+        except IOError as err:
+            print(f"nie moge zapisac do pliku {nazwa_pliku}...")
+        
+#======================================================
+
+if __name__ == "__main__":
+    pogoda = Pogoda("pogoda.txt")
+    
